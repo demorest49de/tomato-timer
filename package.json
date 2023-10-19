@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack"
+    "start": "set NODE_ENV=development&&webpack serve --open",
+    "dev": "set NODE_ENV=development&&webpack serve --open",
+    "build": "set NODE_ENV=development&&webpack serve --open",
+    "clear": "rd /s /q dist"
   },
   "keywords": [],
   "author": "andrey shevchenko",
