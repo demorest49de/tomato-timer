@@ -10,9 +10,9 @@ module.exports = {
     },
     entry: './src/index.js',
     output: {
-        filename: "index.js",
+        filename: "[name][contenthash].js",
         path: path.resolve(__dirname, 'dist'),
-        clean: true,
+        // clean: true,
     },
     
 }

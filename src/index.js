@@ -5,7 +5,7 @@ document.querySelector('.button-importance').addEventListener('click', ({target}
   if (count >= imp.length) {
     count = 0
   }
-
+  console.log(' count: ', count);
   for (let i = 0; i < imp.length; i++) {
     if (count === i) {
       target.classList.add(imp[i])
