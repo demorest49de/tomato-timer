@@ -1,5 +1,6 @@
-
+const path = require('path');
 const mode =  process.env.NODE_ENV || 'development';
+
 
 module.exports = {
     mode,
@@ -9,7 +10,9 @@ module.exports = {
     },
     entry: './src/index.js',
     output: {
-        filename: "index.js"
+        filename: "index.js",
+        path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     
 }
