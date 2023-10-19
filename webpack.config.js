@@ -1,5 +1,8 @@
-console.log(' process.env.NODE_ENV: ', process.env.NODE_ENV);
+
+const mode =  process.env.NODE_ENV || 'development';
+
 module.exports = {
+    mode,
     devtool: 'source-map',
     devServer: {
         hot: true,
