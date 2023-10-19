@@ -1,5 +1,6 @@
 const path = require('path');
-const mode =  process.env.NODE_ENV || 'development';
+const HtmlWebapckPlugin = require('html-webpack-plugin');
+const mode = process.env.NODE_ENV || 'development';
 
 
 module.exports = {
@@ -12,7 +13,12 @@ module.exports = {
     output: {
         filename: "[name][contenthash].js",
         path: path.resolve(__dirname, 'dist'),
-        // clean: true,
+        clean: true,
     },
+    plugins: [
+        new HtmlWebapckPlugin({
+            template: "./src/index.html"
+        }),
+    ],
     
-}
+};
