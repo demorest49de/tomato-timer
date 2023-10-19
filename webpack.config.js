@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebapckPlugin = require('html-webpack-plugin');
 const mode = process.env.NODE_ENV || 'development';
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode,
@@ -19,6 +19,13 @@ module.exports = {
         new HtmlWebapckPlugin({
             template: "./src/index.html"
         }),
+        new MiniCssExtractPlugin(),
     ],
-    
+    module: {
+        rules: [
+            {
+                //29-19
+            },
+        ]
+    }
 };
