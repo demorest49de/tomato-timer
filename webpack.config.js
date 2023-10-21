@@ -18,12 +18,15 @@ module.exports = {
         filename: "[name][contenthash].js",
         path: path.resolve(__dirname, 'dist'),
         clean: true,
+        assetModuleFilename: 'assets/[hash][ext][query]',
     },
     plugins: [
         new HtmlWebapckPlugin({
             template: "./src/index.html"
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name][contenthash].css",
+        }),
     ],
     module: {
         rules: [
