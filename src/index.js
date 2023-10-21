@@ -1,4 +1,5 @@
 import './scss/index.scss';
+import './index.html';
 
 let count = 0;
 const imp = ['default', 'important', 'so-so'];
