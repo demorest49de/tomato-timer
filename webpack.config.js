@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebapckPlugin = require('html-webpack-plugin');
-const mode = process.env.NODE_ENV || 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const mode = process.env.NODE_ENV || 'development';
+const target = mode === 'development' ? 'web' : 'browserslist';
 
 module.exports = {
     mode,
@@ -24,7 +26,13 @@ module.exports = {
     module: {
         rules: [
             {
-                //29-19
+                test: /\.(sa|sc|c)ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader',
+                ],
             },
         ]
     }
