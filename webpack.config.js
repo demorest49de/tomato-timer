@@ -7,6 +7,7 @@ const target = mode === 'development' ? 'web' : 'browserslist';
 
 module.exports = {
     mode,
+    target,
     devtool: 'source-map',
     devServer: {
         hot: true,
