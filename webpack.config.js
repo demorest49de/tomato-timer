@@ -51,6 +51,16 @@ module.exports = {
                 test: /\.(woff2|woff|eot|ttf|otf)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.m?js$/i,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                    }
+                },
+            },
         ]
     }
 };
