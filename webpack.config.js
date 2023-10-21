@@ -31,6 +31,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/i,
+                loader: "html-loader",
+            },
+            {
                 test: /\.(sa|sc|c)ss$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
@@ -40,12 +44,12 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpg|jpeg|png|svg|gif|avif|webp)/i,
-                type: 'assets/resource',
+                test: /\.(jpg|jpeg|png|svg|gif|avif|webp)$/i,
+                type: 'asset/resource',
             },
             {
-                test: /\.(woff2|woff|eot|ttf|otf)/i,
-                type: 'assets/resource',
+                test: /\.(woff2|woff|eot|ttf|otf)$/i,
+                type: 'asset/resource',
             },
         ]
     }
