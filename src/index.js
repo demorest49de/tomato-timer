@@ -17,21 +17,3 @@ document.querySelector('.button-importance').addEventListener('click', ({target}
         }
     }
 });
-
-//
-// const formatsCSS = [
-//     '.css',
-//     '.scss',
-//     '.sass',
-//     '.suss',
-//     '.sasss',
-//     '.ssasss',
-// ];
-//
-// const validCSSformats = /(\.(sa|c|sc)ss)$/g;
-//
-// for (let i = 0; i < formatsCSS.length; i++) {
-//     const element = formatsCSS[i];
-//     const match = element.match(validCSSformats);
-//     console.log(' match: ', match, i);
-// }
