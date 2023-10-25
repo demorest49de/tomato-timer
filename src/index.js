@@ -1,5 +1,6 @@
 import './scss/index.scss';
 import './index.html';
+import {Timer} from './js/Car.js';
 
 let count = 0;
 const imp = ['default', 'important', 'so-so'];
@@ -18,23 +19,8 @@ document.querySelector('.button-importance').addEventListener('click', ({target}
     }
 });
 
-console.log(' Date.now(): ', Date.now().toString());
-
-class Timer {
-    #name;
-    #counter;
-    #id;
-    constructor(name = '', counter = 0) {
-        this.#name = name;
-        this.#counter = counter;
-        this.#id = Date.now().toString();
-    }
-    
-    increaseCounter() {
-        this.#counter += 1;
-    }
-    
-    changeName(value) {
-        this.#name = value;
-    }
-}
+const timer = new Timer('tomato one');
+timer.increaseCounter();
+timer.increaseCounter();
+timer.changeName('tomato two');
+console.log(`Counter name: ${timer.name}, count: ${timer.counter}`)
