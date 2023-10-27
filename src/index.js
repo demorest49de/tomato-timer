@@ -23,4 +23,4 @@ const timer = new Timer('tomato one');
 timer.increaseCounter();
 timer.increaseCounter();
 timer.changeName('tomato two');
-console.log(`Counter name: ${timer.name}, count: ${timer.counter}`)
+console.log(`Counter name: ${timer.name}, count: ${timer.counter}`);
