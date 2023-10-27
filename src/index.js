@@ -1,6 +1,6 @@
 import './scss/index.scss';
 import './index.html';
-import {Timer} from './js/Car.js';
+import {Timer} from './js/Timer.js';
 
 let count = 0;
 const imp = ['default', 'important', 'so-so'];
