@@ -1,5 +1,7 @@
-import './scss/index.scss';
-import './index.html';
+//todo for debuging
+// import './scss/index.scss';
+// import './index.html';
+
 import {Timer} from './js/Timer.js';
 
 let count = 0;
