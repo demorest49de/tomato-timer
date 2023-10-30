@@ -2,7 +2,7 @@
 // import './scss/index.scss';
 // import './index.html';
 
-import {Timer} from './js/Timer.js';
+import {Tomato} from "./js/Tomato.js";
 
 let count = 0;
 const imp = ['default', 'important', 'so-so'];
@@ -20,9 +20,10 @@ document.querySelector('.button-importance').addEventListener('click', ({target}
         }
     }
 });
-
-const timer = new Timer('tomato one');
-timer.increaseCounter();
-timer.increaseCounter();
-timer.changeName('tomato two');
-console.log(`Counter name: ${timer.name}, count: ${timer.counter}`);
+const tomato = new Tomato({});
+//
+// const timer = new Timer('tomato one');
+// timer.increaseCounter();
+// timer.increaseCounter();
+// timer.changeName('tomato two');
+// console.log(`Counter name: ${timer.name}, count: ${timer.counter}`);

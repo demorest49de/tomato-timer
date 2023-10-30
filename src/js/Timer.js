@@ -1,3 +1,4 @@
+
 let idCounter = 0;
 export class Timer {
     #name;
@@ -24,5 +25,18 @@ export class Timer {
     
     get counter(){
         return this.#counter;
+    }
+    
+    startTimer(estimated) {
+        let sec = estimated * 5;
+        const timer = setInterval(() => {
+            console.clear();
+            console.log(` seconds left: ${sec}`);
+            sec--;
+            if (sec < 0) {
+                clearInterval(timer);
+                console.clear();
+            }
+        }, 1000);
     }
 }
