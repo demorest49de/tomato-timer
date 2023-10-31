@@ -20,7 +20,36 @@ document.querySelector('.button-importance').addEventListener('click', ({target}
         }
     }
 });
-const tomato = new Tomato({});
+const tasks = [
+    {
+        id: 1,
+        name: 'Сверстать сайт',
+        priority: 1,
+        isActive: true,
+        counter: 1,
+        remainingTime: 10
+        
+    },
+    {
+        id: 2,
+        name: 'Заплатить за квартиру',
+        priority: 2,
+        isActive: false,
+        counter: 0,
+        remainingTime: NaN,
+    },
+    {
+        id: 3,
+        name: 'Почистить свеклу',
+        priority: 3,
+        isActive: false,
+        counter: 0,
+        remainingTime: NaN,
+    },
+]
+
+const tomato = new Tomato(
+    {tasks: tasks});
 //
 // const timer = new Timer('tomato one');
 // timer.increaseCounter();

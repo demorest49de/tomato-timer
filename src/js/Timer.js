@@ -4,6 +4,7 @@ export class Timer {
     #name;
     #counter;
     #id;
+    
     constructor(name = '', counter = 0) {
         idCounter += 1;
         this.#name = name;
@@ -28,14 +29,16 @@ export class Timer {
     }
     
     startTimer(estimated) {
-        let sec = estimated * 5;
-        const timer = setInterval(() => {
+        let sec = estimated * 60;
+        const timerId = setInterval(() => {
             console.clear();
             console.log(` seconds left: ${sec}`);
             sec--;
             if (sec < 0) {
-                clearInterval(timer);
+                clearInterval(timerId);
+                this.increaseCounter();
                 console.clear();
+                return true;
             }
         }, 1000);
     }

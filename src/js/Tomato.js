@@ -1,27 +1,36 @@
 import {Timer} from "./Timer.js";
 
 export class Tomato {
-    #estimated;
-    #paused;
-    #bigPaused;
+    #estimatedTime;
+    #pauseTime;
+    #bigPauseTime;
     #tasks;
     #activeTask;
     
-    constructor({estimated = 25, paused = 5, bigPaused = 15, tasks = []}) {
-        this.#estimated = estimated;
-        this.#paused = paused;
-        this.#bigPaused = bigPaused;
+    constructor({
+                    estimatedTime: estimatedTime = 25,
+                    pauseTime: pauseTime = 5,
+                    bigPauseTime: bigPauseTime = 15,
+                    tasks = []
+                }) {
+        this.#estimatedTime = estimatedTime;
+        this.#pauseTime = pauseTime;
+        this.#bigPauseTime = bigPauseTime;
         this.#tasks = tasks;
+        // ?
         this.#activeTask = null;
         this.init();
-    }
-    
-    init() {
+        
+        // test
         this.startTask();
     }
     
+    init() {
+        this.#activeTask = this.activeTask;
+    }
+    
     get time() {
-        return {estimated: this.#estimated, paused: this.#paused, bigPaused: this.#bigPaused};
+        return {estimatedTime: this.#estimatedTime, pauseTime: this.#pauseTime, bigPauseTime: this.#bigPauseTime};
     }
     
     get tasks() {
@@ -29,7 +38,7 @@ export class Tomato {
     }
     
     get activeTask() {
-        return this.#activeTask;
+        return this.#tasks.find(t => t.isActive);
     }
     
     addTask(task) {
@@ -37,16 +46,36 @@ export class Tomato {
     }
     
     activateTask(id) {
-        console.log(' получить задачу из this.#tasks: по id и пометить ее как активную???');
-        
+        this.untasksAllTasks();
+        for (const task of this.#tasks) {
+            if (task.id === id) {
+                task.isActive = true;
+                return;
+            }
+        }
+    }
+    
+    increaseCounter(id) {
+    
+    }
+    
+    untasksAllTasks() {
+        for (const task of this.#tasks) {
+            if (task.isActive) task.isActive = false;
+        }
     }
     
     startTask() {
-        const timer = new Timer("name", 1);
-        timer.startTimer(1);
-        // if (this.#activeTask) {
-        // } else {
-        //     console.log(`Error. No active task available!`);
-        // }
+        if (this.#activeTask) {
+            const task = this.#activeTask;
+            const timer = new Timer(task.name, task.counter);
+            
+        } else {
+            console.log(`Error. No active task available!`);
+        }
+        
+        //     if (isFinished && timer.counter % 3 === 0) {
+        //         timer.startTimer(this.#bigPauseTime);
+        //     }
     }
 }
