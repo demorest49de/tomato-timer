@@ -8,10 +8,10 @@ export class Tomato {
     #activeTask;
     
     constructor({
-                    estimatedTime: estimatedTime = 0.1,
-                    pauseTime: pauseTime = 0.25,
-                    bigPauseTime: bigPauseTime = 0.25,
-                    
+                    estimatedTime: estimatedTime = 0.07,
+                    pauseTime: pauseTime = 0.06,
+                    bigPauseTime: bigPauseTime = 0.05,
+        
                     // estimatedTime: estimatedTime = 25,
                     // pauseTime: pauseTime = 5,
                     // bigPauseTime: bigPauseTime = 15,
@@ -21,8 +21,8 @@ export class Tomato {
         this.#pauseTime = pauseTime;
         this.#bigPauseTime = bigPauseTime;
         this.#tasks = tasks;
-        // ?
         this.#activeTask = null;
+        
         this.init();
         
         // test
@@ -60,7 +60,7 @@ export class Tomato {
     }
     
     increaseCounter(id) {
-    
+        
     }
     
     deactivateAllTasks() {
@@ -73,12 +73,16 @@ export class Tomato {
         const {estimatedTime, pauseTime, bigPauseTime} = this.time;
         switch (true) {
             case counter === 0:
+                console.log(`estimatedTime - 25`);
                 return estimatedTime;
             case counter % 4 === 0:
+                console.log(`bigPauseTime - 15`);
                 return remainingTime = remainingTime ? remainingTime : bigPauseTime;
             case counter % 2 === 0:
+                console.log(`pauseTime - 5`);
                 return remainingTime = remainingTime ? remainingTime : pauseTime;
             default:
+                console.log(`estimatedTime`);
                 return remainingTime = remainingTime ? remainingTime : estimatedTime;
         }
     }
@@ -91,7 +95,14 @@ export class Tomato {
             remainingTime = this.pomidorType(remainingTime, task.counter);
             
             const timer = new Timer(task.name, task.counter, remainingTime);
-            timer.startTimer();
+            const timerPromise = timer.startTimer();
+            timerPromise.then(counter => {
+                task.counter = counter;
+                if (counter % 2 !== 0) {
+                    task.finishedTasksCounter += 1;
+                }
+                console.log(' this.#activeTask: ', this.#activeTask);
+            });
         } else {
             console.log(`Error. No active task available!`);
         }

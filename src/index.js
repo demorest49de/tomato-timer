@@ -26,7 +26,8 @@ const tasks = [
         name: 'Сверстать сайт',
         priority: 1,
         isActive: false,
-        counter: 1,
+        finishedTasksCounter: 0,
+        counter: 2,
         remainingTime: 10,
     },
     {
@@ -34,16 +35,18 @@ const tasks = [
         name: 'Заплатить за квартиру',
         priority: 2,
         isActive: true,
+        finishedTasksCounter: 0,
         counter: 0,
-        remainingTime: NaN,
+        remainingTime: 0,
     },
     {
         id: 3,
         name: 'Почистить свеклу',
         priority: 3,
         isActive: false,
+        finishedTasksCounter: 0,
         counter: 0,
-        remainingTime: NaN,
+        remainingTime: 0,
     },
 ]
 
