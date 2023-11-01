@@ -1,15 +1,15 @@
-
-let idCounter = 0;
 export class Timer {
     #name;
     #counter;
-    #id;
+    #remainingTime;
     
-    constructor(name = '', counter = 0) {
-        idCounter += 1;
+    constructor(name = 'томат',
+                counter = 0,
+                remainingTime = NaN,
+    ) {
         this.#name = name;
         this.#counter = counter;
-        this.#id = idCounter;
+        this.#remainingTime = remainingTime;
     }
     
     increaseCounter() {
@@ -20,25 +20,27 @@ export class Timer {
         this.#name = value;
     }
     
-    get name(){
+    get name() {
         return this.#name;
     }
     
-    get counter(){
+    get counter() {
         return this.#counter;
     }
     
-    startTimer(estimated) {
-        let sec = estimated * 60;
+    startTimer() {
+        const remainingTime = this.#remainingTime;
+        let sec = remainingTime * 60;
         const timerId = setInterval(() => {
             console.clear();
             console.log(` seconds left: ${sec}`);
             sec--;
             if (sec < 0) {
                 clearInterval(timerId);
+                // todo счетчик увеличиваем только для завершенных помидорок
                 this.increaseCounter();
                 console.clear();
-                return true;
+                return {remainingTime: 0, counter: this.counter};
             }
         }, 1000);
     }

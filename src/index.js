@@ -25,16 +25,15 @@ const tasks = [
         id: 1,
         name: 'Сверстать сайт',
         priority: 1,
-        isActive: true,
+        isActive: false,
         counter: 1,
-        remainingTime: 10
-        
+        remainingTime: 10,
     },
     {
         id: 2,
         name: 'Заплатить за квартиру',
         priority: 2,
-        isActive: false,
+        isActive: true,
         counter: 0,
         remainingTime: NaN,
     },
@@ -50,6 +49,7 @@ const tasks = [
 
 const tomato = new Tomato(
     {tasks: tasks});
+//
 //
 // const timer = new Timer('tomato one');
 // timer.increaseCounter();

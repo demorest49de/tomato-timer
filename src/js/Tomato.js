@@ -8,9 +8,12 @@ export class Tomato {
     #activeTask;
     
     constructor({
-                    estimatedTime: estimatedTime = 25,
-                    pauseTime: pauseTime = 5,
-                    bigPauseTime: bigPauseTime = 15,
+                    estimatedTime: estimatedTime = 0.25,
+                    pauseTime: pauseTime = 0.25,
+                    bigPauseTime: bigPauseTime = 0.25,
+                    // estimatedTime: estimatedTime = 25,
+                    // pauseTime: pauseTime = 5,
+                    // bigPauseTime: bigPauseTime = 15,
                     tasks = []
                 }) {
         this.#estimatedTime = estimatedTime;
@@ -22,7 +25,7 @@ export class Tomato {
         this.init();
         
         // test
-        this.startTask();
+        this.proceedTask();
     }
     
     init() {
@@ -65,17 +68,30 @@ export class Tomato {
         }
     }
     
-    startTask() {
+    proceedTask() {
         if (this.#activeTask) {
             const task = this.#activeTask;
-            const timer = new Timer(task.name, task.counter);
+            let remainingTime = task.remainingTime;
+            
+            switch (true) {
+                case task.counter === 0:
+                    remainingTime = this.#estimatedTime;
+                    break;
+                case task.counter % 4 === 0:
+                    remainingTime = remainingTime ? remainingTime : this.#bigPauseTime;
+                    break;
+                case task.counter % 2 === 0:
+                    remainingTime = remainingTime ? remainingTime : this.#bigPauseTime;
+                    break;
+                default:
+                    remainingTime = remainingTime ? remainingTime : this.#estimatedTime;
+                    break;
+            }
+            const timer = new Timer(task.name, task.counter, remainingTime);
+            timer.startTimer();
             
         } else {
             console.log(`Error. No active task available!`);
         }
-        
-        //     if (isFinished && timer.counter % 3 === 0) {
-        //         timer.startTimer(this.#bigPauseTime);
-        //     }
     }
 }
