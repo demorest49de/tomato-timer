@@ -38,11 +38,9 @@ export class Timer {
                 sec--;
                 if (sec < 0) {
                     clearInterval(timerId);
-                    resolve(this.counter);
+                    resolve();
                 }
             }, 1000);
         });
-        
-        
     }
 }
