@@ -27,7 +27,7 @@ const tasks = [
         priority: 1,
         isActive: false,
         finishedTasksCounter: 0,
-        counter: 2,
+        counter: 1,
         remainingTime: 10,
     },
     {
@@ -35,8 +35,8 @@ const tasks = [
         name: 'Заплатить за квартиру',
         priority: 2,
         isActive: true,
-        finishedTasksCounter: 0,
-        counter: 0,
+        finishedTasksCounter: 2,
+        counter: 5,
         remainingTime: 0,
     },
     {
@@ -45,7 +45,7 @@ const tasks = [
         priority: 3,
         isActive: false,
         finishedTasksCounter: 0,
-        counter: 0,
+        counter: 1,
         remainingTime: 0,
     },
 ]

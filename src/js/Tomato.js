@@ -60,7 +60,12 @@ export class Tomato {
     }
     
     increaseCounter(id) {
-        
+        for (const task of this.#tasks) {
+            if (task.id === id) {
+                task.finishedTasksCounter += 1;
+                return;
+            }
+        }
     }
     
     deactivateAllTasks() {
@@ -72,7 +77,7 @@ export class Tomato {
     pomidorType(remainingTime, counter) {
         const {estimatedTime, pauseTime, bigPauseTime} = this.time;
         switch (true) {
-            case counter === 0:
+            case counter === 1:
                 console.log(`estimatedTime - 25`);
                 return estimatedTime;
             case counter % 4 === 0:
@@ -82,7 +87,7 @@ export class Tomato {
                 console.log(`pauseTime - 5`);
                 return remainingTime = remainingTime ? remainingTime : pauseTime;
             default:
-                console.log(`estimatedTime`);
+                console.log(`estimatedTime - 25 or unfinished time`);
                 return remainingTime = remainingTime ? remainingTime : estimatedTime;
         }
     }
@@ -101,6 +106,7 @@ export class Tomato {
                 if (counter % 2 !== 0) {
                     task.finishedTasksCounter += 1;
                 }
+                task.counter += 1;
                 console.log(' this.#activeTask: ', this.#activeTask);
             });
         } else {

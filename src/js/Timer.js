@@ -38,8 +38,6 @@ export class Timer {
                 sec--;
                 if (sec < 0) {
                     clearInterval(timerId);
-                    // todo счетчик увеличиваем только для завершенных помидорок
-                    this.increaseCounter();
                     resolve(this.counter);
                 }
             }, 1000);
