@@ -30,7 +30,7 @@ export class Timer {
     
     startTimer() {
         const remainingTime = this.#remainingTime;
-        let sec = remainingTime * 60;
+        let sec = remainingTime;
         return new Promise(resolve => {
             const timerId = setInterval(() => {
                 

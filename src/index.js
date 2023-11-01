@@ -37,7 +37,7 @@ const tasks = [
         isActive: true,
         finishedTasksCounter: 0,
         counter: 1,
-        remainingTime: 0,
+        remainingTime: 5,
     },
     {
         id: 3,

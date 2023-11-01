@@ -7,14 +7,13 @@ export class Tomato {
     #tasks;
     #activeTask;
     
+    //test
+    #secondsMin = 0.05;
+    
     constructor({
-                    estimatedTime: estimatedTime = 0.07,
-                    pauseTime: pauseTime = 0.06,
-                    bigPauseTime: bigPauseTime = 0.05,
-        
-                    // estimatedTime: estimatedTime = 25,
-                    // pauseTime: pauseTime = 5,
-                    // bigPauseTime: bigPauseTime = 15,
+                    estimatedTime: estimatedTime = 25 * this.#secondsMin,
+                    pauseTime: pauseTime = 5 * this.#secondsMin,
+                    bigPauseTime: bigPauseTime = 15 * this.#secondsMin,
                     tasks = []
                 }) {
         this.#estimatedTime = estimatedTime;
@@ -30,7 +29,23 @@ export class Tomato {
     }
     
     init() {
-        this.#activeTask = this.activeTask;
+        //test
+        if (!localStorage.getItem('pomidor')) {
+            const pomidor = JSON.stringify({
+                id: 2,
+                name: 'Заплатить за квартиру',
+                priority: 2,
+                isActive: true,
+                finishedTasksCounter: 0,
+                counter: 1,
+                remainingTime: 5,
+            });
+            localStorage.setItem('pomidor', pomidor);
+        }
+        
+        this.#activeTask = JSON.parse(localStorage.getItem('pomidor'));
+        
+        // this.#activeTask = this.activeTask;
     }
     
     get time() {
@@ -60,12 +75,14 @@ export class Tomato {
     }
     
     increaseCounter(id) {
-        for (const task of this.#tasks) {
-            if (task.id === id) {
-                task.counter += 1;
-                return;
-            }
-        }
+        //test
+        this.#activeTask.counter += 1;
+        // for (const task of this.#tasks) {
+        //     if (task.id === id) {
+        //         task.counter += 1;
+        //         return;
+        //     }
+        // }
     }
     
     deactivateAllTasks() {
@@ -79,7 +96,7 @@ export class Tomato {
         switch (true) {
             case counter === 1:
                 console.log(`estimatedTime - 25`);
-                return estimatedTime;
+                return remainingTime = remainingTime ? remainingTime : estimatedTime;
             case counter % 4 === 0:
                 console.log(`bigPauseTime - 15`);
                 return remainingTime = remainingTime ? remainingTime : bigPauseTime;
@@ -107,12 +124,11 @@ export class Tomato {
                 if (counter % 2 !== 0) {
                     task.finishedTasksCounter += 1;
                 }
-               this.increaseCounter(task.id);
+                this.increaseCounter(task.id);
                 console.log(' this.#activeTask: ', this.#activeTask);
+                
                 //test
-                if(task.counter < 7){
-                    this.proceedTask();
-                }
+                localStorage.setItem('pomidor', JSON.stringify(this.#activeTask));
             });
         } else {
             console.log(`Error. No active task available!`);
