@@ -35,8 +35,8 @@ const tasks = [
         name: 'Заплатить за квартиру',
         priority: 2,
         isActive: true,
-        finishedTasksCounter: 2,
-        counter: 5,
+        finishedTasksCounter: 0,
+        counter: 1,
         remainingTime: 0,
     },
     {

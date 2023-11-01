@@ -62,7 +62,7 @@ export class Tomato {
     increaseCounter(id) {
         for (const task of this.#tasks) {
             if (task.id === id) {
-                task.finishedTasksCounter += 1;
+                task.counter += 1;
                 return;
             }
         }
@@ -100,14 +100,19 @@ export class Tomato {
             remainingTime = this.pomidorType(remainingTime, task.counter);
             
             const timer = new Timer(task.name, task.counter, remainingTime);
+            console.log(' this.#activeTask: ', this.#activeTask);
             const timerPromise = timer.startTimer();
             timerPromise.then(counter => {
                 task.counter = counter;
                 if (counter % 2 !== 0) {
                     task.finishedTasksCounter += 1;
                 }
-                task.counter += 1;
+               this.increaseCounter(task.id);
                 console.log(' this.#activeTask: ', this.#activeTask);
+                //test
+                if(task.counter < 7){
+                    this.proceedTask();
+                }
             });
         } else {
             console.log(`Error. No active task available!`);
