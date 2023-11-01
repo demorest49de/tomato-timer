@@ -13,7 +13,9 @@ export class Timer {
     }
     
     increaseCounter() {
-        this.#counter += 1;
+        if (this.#counter === 0 || this.#counter % 2 !== 0) {
+            this.#counter += 1;
+        }
     }
     
     changeName(value) {
