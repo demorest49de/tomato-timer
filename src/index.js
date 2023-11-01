@@ -27,7 +27,7 @@ const tasks = [
         priority: 1,
         isActive: false,
         finishedTasksCounter: 0,
-        counter: 1,
+        counter: 0,
         remainingTime: 10,
     },
     {
@@ -36,8 +36,8 @@ const tasks = [
         priority: 2,
         isActive: true,
         finishedTasksCounter: 0,
-        counter: 1,
-        remainingTime: 5,
+        counter: 0,
+        remainingTime: 0,
     },
     {
         id: 3,
@@ -45,7 +45,7 @@ const tasks = [
         priority: 3,
         isActive: false,
         finishedTasksCounter: 0,
-        counter: 1,
+        counter: 0,
         remainingTime: 0,
     },
 ]

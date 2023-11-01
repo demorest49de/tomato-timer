@@ -8,12 +8,12 @@ export class Tomato {
     #activeTask;
     
     //test
-    #secondsMin = 0.05;
+    #secondsMin = 1;
     
     constructor({
-                    estimatedTime: estimatedTime = 25 * this.#secondsMin,
-                    pauseTime: pauseTime = 5 * this.#secondsMin,
-                    bigPauseTime: bigPauseTime = 15 * this.#secondsMin,
+                    estimatedTime: estimatedTime = 6 * this.#secondsMin,
+                    pauseTime: pauseTime = 6 * this.#secondsMin,
+                    bigPauseTime: bigPauseTime = 6 * this.#secondsMin,
                     tasks = []
                 }) {
         this.#estimatedTime = estimatedTime;
@@ -37,8 +37,8 @@ export class Tomato {
                 priority: 2,
                 isActive: true,
                 finishedTasksCounter: 0,
-                counter: 1,
-                remainingTime: 5,
+                counter: 0,
+                remainingTime: 0,
             });
             localStorage.setItem('pomidor', pomidor);
         }
@@ -48,6 +48,7 @@ export class Tomato {
         // this.#activeTask = this.activeTask;
     }
     
+ // region
     get time() {
         return {estimatedTime: this.#estimatedTime, pauseTime: this.#pauseTime, bigPauseTime: this.#bigPauseTime};
     }
@@ -91,20 +92,20 @@ export class Tomato {
         }
     }
     
-    pomidorType(remainingTime, counter) {
+    // endregion
+    
+    pomidorType(remainingTime, counter, finishedTasksCounter) {
         const {estimatedTime, pauseTime, bigPauseTime} = this.time;
         switch (true) {
-            case counter === 1:
-                console.log(`estimatedTime - 25`);
-                return remainingTime = remainingTime ? remainingTime : estimatedTime;
-            case counter % 4 === 0:
-                console.log(`bigPauseTime - 15`);
-                return remainingTime = remainingTime ? remainingTime : bigPauseTime;
+            case finishedTasksCounter > 0
+            && finishedTasksCounter % 3 === 0:
+                console.log(`длинная пауза - 15 мин`);
+                return remainingTime ? remainingTime : bigPauseTime;
             case counter % 2 === 0:
-                console.log(`pauseTime - 5`);
+                console.log(`пауза - 5 мин`);
                 return remainingTime = remainingTime ? remainingTime : pauseTime;
             default:
-                console.log(`estimatedTime - 25 or unfinished time`);
+                console.log(`задача - 25 мин или незаконченное время`);
                 return remainingTime = remainingTime ? remainingTime : estimatedTime;
         }
     }
@@ -113,22 +114,31 @@ export class Tomato {
         if (this.#activeTask) {
             const task = this.#activeTask;
             let remainingTime = task.remainingTime;
+            const finishedTasksCounter = this.#activeTask.finishedTasksCounter;
             
-            remainingTime = this.pomidorType(remainingTime, task.counter);
+            this.increaseCounter(task.id);
+            console.log(' this.#activeTask.counter: ', this.#activeTask.counter);
+            console.log(' this.#activeTask.finishedTasksCounter: ', this.#activeTask.finishedTasksCounter);
+    
+            remainingTime = this.pomidorType(remainingTime, task.counter, finishedTasksCounter);
             
             const timer = new Timer(task.name, task.counter, remainingTime);
             console.log(' this.#activeTask: ', this.#activeTask);
             const timerPromise = timer.startTimer();
             timerPromise.then(counter => {
+                
                 task.counter = counter;
+                this.#activeTask.remainingTime = 0;
+                
                 if (counter % 2 !== 0) {
                     task.finishedTasksCounter += 1;
                 }
-                this.increaseCounter(task.id);
+                
                 console.log(' this.#activeTask: ', this.#activeTask);
                 
                 //test
                 localStorage.setItem('pomidor', JSON.stringify(this.#activeTask));
+                window.location.href = `http://localhost:63342/tomato-timer/src/index.html`;
             });
         } else {
             console.log(`Error. No active task available!`);
