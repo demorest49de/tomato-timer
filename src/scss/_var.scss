@@ -9,7 +9,6 @@ $popup-border: #C4C4C4;
 $button-main: #DC0D27;
 
 
-
 @function lighter($color, $tone) {
   $adjust: 16*$tone;
   @return adjust-color($color, $red: $adjust, $green: $adjust, $blue: $adjust);
