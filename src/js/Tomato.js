@@ -100,7 +100,7 @@ export class Tomato {
                 console.log(`пауза - 5 мин`);
                 return remainingTime = remainingTime ? remainingTime : pauseTime;
             default:
-                console.log(`задача - 25 мин или незаконченное время`);
+                console.log(`задача - 25 мин`);
                 return remainingTime = remainingTime ? remainingTime : estimatedTime;
         }
     }
