@@ -8,12 +8,12 @@ export class Tomato {
   #activeTask;
 
   // test
-  #secondsMin = 1;
+  #seconds = 60;
 
   constructor({
-    estimatedTime = 6 * this.#secondsMin,
-    pauseTime = 6 * this.#secondsMin,
-    bigPauseTime = 6 * this.#secondsMin,
+    estimatedTime = 25 * this.#seconds,
+    pauseTime = 5 * this.#seconds,
+    bigPauseTime = 15 * this.#seconds,
     tasks = [],
   }) {
     this.#estimatedTime = estimatedTime;
@@ -94,13 +94,13 @@ export class Tomato {
     const {estimatedTime, pauseTime, bigPauseTime} = this.time;
     switch (true) {
       case counter % 6 === 0:
-        console.log(`длинная пауза - 15 мин`);
+        console.log(`КАЖДАЯ 3-Я ДЛИННАЯ ПАУЗА - 15 мин`);
         return remainingTime ? remainingTime : bigPauseTime;
       case counter % 2 === 0:
-        console.log(`пауза - 5 мин`);
+        console.log(`КОРОТКАЯ ПАУЗА - 5 мин`);
         return remainingTime = remainingTime ? remainingTime : pauseTime;
       default:
-        console.log(`задача - 25 мин`);
+        console.log(`ЗАДАЧА - 25 мин`);
         return remainingTime = remainingTime ? remainingTime : estimatedTime;
     }
   }
@@ -111,12 +111,12 @@ export class Tomato {
       let remainingTime = task.remainingTime;
 
       this.increaseCounter(task.id);
-      console.log(' this.#activeTask.counter: ', this.#activeTask.counter);
 
       remainingTime = this.pomidorType(remainingTime, task.counter);
 
       const timer = new Timer(task.name, task.counter, remainingTime);
       console.log(' this.#activeTask: ', this.#activeTask);
+      console.log(' task.counter: ', task.counter);
       const timerPromise = timer.startTimer();
       timerPromise.then(() => {
         this.#activeTask.remainingTime = 0;
@@ -124,7 +124,7 @@ export class Tomato {
 
         // test
         localStorage.setItem('pomidor', JSON.stringify(this.#activeTask));
-        window.location.href = `http://localhost:63342/tomato-timer/src/index.html`;
+        window.location.href = `http://localhost:8080`;
       });
     } else {
       console.log(`Error. No active task available!`);

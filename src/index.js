@@ -49,4 +49,3 @@ const tasks = [
 
 const tomato = new Tomato(
   {tasks});
-console.log(tomato);
