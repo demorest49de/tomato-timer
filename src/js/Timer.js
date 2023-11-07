@@ -35,7 +35,7 @@ export class Timer {
     return {minutes: min, seconds: seconds};
   }
   
-  startTimer() {
+  startTimer(activeTask) {
     const remainingTime = this.#remainingTime;
     let sec = remainingTime;
     return new Promise(resolve => {
@@ -43,6 +43,8 @@ export class Timer {
         const {minutes, seconds} = this.secToTime(sec);
         console.log(`${minutes} min: ${seconds} sec`);
         sec--;
+        localStorage.setItem('pomidor', JSON.stringify(activeTask));
+        activeTask.remainingTime = sec;
         if (sec < 0) {
           clearInterval(timerId);
           resolve();
