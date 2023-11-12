@@ -7,9 +7,9 @@ export class Tomato {
   #tasks;
   #activeTask;
   #hasWorkTask;
-  // test
   
-  #seconds = .5;
+  //test
+  #seconds = 1;
   
   constructor({
                 estimatedTime = 25 * this.#seconds,
@@ -140,10 +140,6 @@ export class Tomato {
         this.#activeTask.timerHistory.push(this.#activeTask.currentTimerType);
         // test
         localStorage.setItem('pomidor', JSON.stringify(this.#activeTask));
-        
-        //todo for debugging purposes;
-        // window.location.href = `http://localhost:63342/tomato-timer/src/index.html`;
-        window.location.href = `http://localhost:8080`; //webpack
       });
     } else {
       console.log(`Error. No active task available!`);

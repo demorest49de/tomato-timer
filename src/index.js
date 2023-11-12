@@ -1,6 +1,6 @@
 // todo for debuging
-import './scss/index.scss';
-import './index.html';
+// import './scss/index.scss';
+// import './index.html';
 
 import {Tomato} from './js/Tomato.js';
 
