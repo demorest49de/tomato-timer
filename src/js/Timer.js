@@ -1,31 +1,17 @@
 export class Timer {
   #name;
   #counter;
-  #finishedPomidoro;
   #seconds;
+  #currentSeconds;
+  #taskSeconds;
   
   constructor(task, time) {
     this.#name = task.name;
-    this.#counter = 0;
+    this.#counter = 1;
     this.time = time;
-    this.#finishedPomidoro = 0;
     this.#seconds = 0;
-  }
-  
-  increaseCounter() {
-    this.#counter += 1;
-  }
-  
-  changeName(value) {
-    this.#name = value;
-  }
-  
-  get name() {
-    return this.#name;
-  }
-  
-  get counter() {
-    return this.#counter;
+    this.#currentSeconds = NaN;
+    this.#taskSeconds = time.taskSeconds;
   }
   
   secToTime(sec) {
@@ -37,7 +23,7 @@ export class Timer {
   
   pomidorType() {
     const {
-      estimatedSeconds, pauseSeconds, bigPauseSeconds,
+      taskSeconds, pauseSeconds, bigPauseSeconds,
     } = this.time;
     switch (true) {
       case (this.#counter > 1 && this.#counter % 6) === 0:
@@ -50,7 +36,8 @@ export class Timer {
         break;
       default:
         console.log(`ЗАДАЧА - 25 мин`);
-        this.#seconds = estimatedSeconds;
+        this.#seconds = taskSeconds;
+        this.#currentSeconds = taskSeconds;
         break;
     }
   }
@@ -59,15 +46,19 @@ export class Timer {
     this.pomidorType();
     this.#counter += 1;
     
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const timerId = setInterval(() => {
         const {minutes, seconds} = this.secToTime(this.#seconds);
         console.log(`${minutes} min: ${seconds} sec`);
         this.#seconds--;
         if (this.#seconds < 0) {
           clearInterval(timerId);
-          this.#finishedPomidoro += 1;
-          resolve(this.#finishedPomidoro);
+          if(this.#currentSeconds === this.#taskSeconds){
+            this.#currentSeconds = NaN;
+            resolve(true);
+          }else{
+            resolve(false);
+          }
         }
       }, 1000);
     });

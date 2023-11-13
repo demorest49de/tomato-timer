@@ -1,24 +1,24 @@
 import {Timer} from './Timer.js';
 
 export class Tomato {
- 
-  #estimatedSeconds;
+  
+  #taskSeconds;
   #pauseSeconds;
   #bigPauseSeconds;
   #tasks;
   #activeTask;
   #timer;
-
+  
   //test
-  #seconds = 10;
+  #seconds = 1;
   
   constructor({
-                estimatedSec = 25 * this.#seconds,
-                pauseSec = 15 * this.#seconds,
-                bigPauseSec = 15 * this.#seconds,
+                taskSec = 6 * this.#seconds,
+                pauseSec = 5 * this.#seconds,
+                bigPauseSec = 5 * this.#seconds,
                 tasks = []
               }) {
-    this.#estimatedSeconds = estimatedSec;
+    this.#taskSeconds = taskSec;
     this.#pauseSeconds = pauseSec;
     this.#bigPauseSeconds = bigPauseSec;
     this.#tasks = tasks;
@@ -53,7 +53,7 @@ export class Tomato {
   
   get time() {
     return {
-      estimatedSeconds: this.#estimatedSeconds,
+      taskSeconds: this.#taskSeconds,
       pauseSeconds: this.#pauseSeconds,
       bigPauseSeconds: this.#bigPauseSeconds
     };
@@ -92,18 +92,20 @@ export class Tomato {
       console.log(' this.#activeTask: ', this.#activeTask);
       console.log(' this.#activeTask.finishedPomidoroCounter: ', this.#activeTask.finishedPomidoro);
       
-      this.restartTimer();
+      this.restartTimer(this.#timer);
     } else {
       console.log(`Error. No active task available!`);
     }
   }
   
-  restartTimer() {
-    const timerPromise = this.#timer.startTimer();
-    timerPromise.then((pomCounter) => {
-      this.#activeTask.finishedPomidoro = pomCounter;
-      localStorage.setItem('pomidor', JSON.stringify(this.#activeTask));
-      this.restartTimer();
+  restartTimer(timer) {
+    const timerPromise = timer.startTimer();
+    timerPromise.then((result) => {
+      if (result) {
+        this.#activeTask.finishedPomidoro += 1;
+        localStorage.setItem('pomidor', JSON.stringify(this.#activeTask));
+      }
+      this.restartTimer(timer);
     });
   }
 }
