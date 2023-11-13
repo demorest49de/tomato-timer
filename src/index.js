@@ -20,36 +20,28 @@ document.querySelector('.button-importance').addEventListener('click', ({target}
     }
   }
 });
+
 const tasks = [
   {
     id: 1,
     name: 'Сверстать сайт',
     priority: 1,
     isActive: false,
-    counter: 1,
-    finishedPomidoroCounter: 0,
-    hasWorkTask: false,
-    remainingTime: 0,
+    finishedPomidoro: 0,
   },
   {
     id: 2,
     name: 'Заплатить за квартиру',
     priority: 2,
     isActive: true,
-        counter: 1,
-        finishedPomidoroCounter: 0,
-        hasWorkTask: false,
-        remainingTime: 0,
+    finishedPomidoro: 0,
   },
   {
     id: 3,
     name: 'Почистить свеклу',
     priority: 3,
     isActive: false,
-        counter: 1,
-        finishedPomidoroCounter: 0,
-        hasWorkTask: false,
-        remainingTime: 0,
+    finishedPomidoro: 0,
   },
 ];
 
